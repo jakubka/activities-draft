@@ -1,0 +1,13 @@
+{
+  "name": "activities-stats",
+  "version": "1.0.0",
+  "scripts": {
+    "p1": "node p1.js",
+    "p2": "node p2.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
