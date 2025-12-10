@@ -35,29 +35,22 @@ const ACTIVITIES = [
   { person: 'Eve', distance: 4.5, type: 'swim', week: 'W05' },
 ];
 
-/**
- * Count how many times each person appeared in top 3 per week
- */
 function getTop3Appearances(activities) {
-  // Group by week, then sum distance per person within each week
   const byWeek = Object.groupBy(activities, a => a.week);
   
   const appearances = {};
   
   for (const weekActivities of Object.values(byWeek)) {
-    // Sum distance per person for this week
     const personTotals = {};
     for (const a of weekActivities) {
       personTotals[a.person] = (personTotals[a.person] || 0) + a.distance;
     }
     
-    // Get top 3 for this week
     const top3 = Object.entries(personTotals)
       .sort((a, b) => b[1] - a[1])
       .slice(0, 3)
       .map(([person]) => person);
     
-    // Count appearances
     for (const person of top3) {
       appearances[person] = (appearances[person] || 0) + 1;
     }
@@ -68,9 +61,6 @@ function getTop3Appearances(activities) {
     .sort((a, b) => b.count - a.count);
 }
 
-/**
- * Generate statistics report
- */
 function generateStatistics(activities) {
   const runs = activities.filter(a => a.type === 'run');
   const swims = activities.filter(a => a.type === 'swim');
@@ -94,7 +84,6 @@ function generateStatistics(activities) {
   };
 }
 
-// Run and display statistics
 const stats = generateStatistics(ACTIVITIES);
 console.log('\n=== Statistics ===\n');
 console.log(JSON.stringify(stats, null, 2));
