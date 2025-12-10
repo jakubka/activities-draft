@@ -35,6 +35,39 @@ const ACTIVITIES = [
   { person: 'Eve', distance: 4.5, type: 'swim', week: 'W05' },
 ];
 
+function getAveragePerPerson(activities) {
+  const personData = {};
+  
+  for (const a of activities) {
+    if (!personData[a.person]) {
+      personData[a.person] = { total: 0, count: 0 };
+    }
+    personData[a.person].total += a.distance;
+    personData[a.person].count += 1;
+  }
+  
+  return Object.entries(personData)
+    .map(([person, { total, count }]) => ({
+      person,
+      average: Math.round((total / count) * 10) / 10
+    }))
+    .sort((a, b) => b.average - a.average);
+}
+
+function getPersonalBests(activities) {
+  const bests = {};
+  
+  for (const a of activities) {
+    if (!bests[a.person] || a.distance > bests[a.person]) {
+      bests[a.person] = a.distance;
+    }
+  }
+  
+  return Object.entries(bests)
+    .map(([person, best]) => ({ person, best }))
+    .sort((a, b) => b.best - a.best);
+}
+
 function getTop3Appearances(activities) {
   const byWeek = Object.groupBy(activities, a => a.week);
   
@@ -76,6 +109,14 @@ function generateStatistics(activities) {
       swim: Math.round(totalSwim)
     },
     personal: {
+      averagePerPerson: {
+        run: getAveragePerPerson(runs),
+        swim: getAveragePerPerson(swims)
+      },
+      personalBests: {
+        run: getPersonalBests(runs),
+        swim: getPersonalBests(swims)
+      },
       top3Appearances: {
         run: getTop3Appearances(runs),
         swim: getTop3Appearances(swims)
