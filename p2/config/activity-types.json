@@ -1,0 +1,17 @@
+{
+  "run": {
+    "calorieRate": 10.5,
+    "category": "cardio",
+    "displayName": "Running"
+  },
+  "swim": {
+    "calorieRate": 14.2,
+    "category": "cardio",
+    "displayName": "Swimming"
+  },
+  "bike": {
+    "calorieRate": 8.3,
+    "category": "cardio",
+    "displayName": "Cycling"
+  }
+}
